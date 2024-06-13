@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Routes, Link, useNavigate } from 'react-router-dom';
-import axios from '../axiosConfig'; // Certifique-se de que o axios está configurado corretamente
+import axios from '../axiosConfig';
 import Logout from '../components/Logout';
-import { Report, Status } from '../types'; // Importe as interfaces do arquivo de tipos
+import { Report, Status } from '../types';
 
 const Dashboard: React.FC = () => {
   const [reports, setReports] = useState<Report[]>([]);
@@ -77,7 +77,6 @@ const Dashboard: React.FC = () => {
   const pendingReports = reports.filter(report => report.status?.name !== 'Concluido');
 
   const handleLogout = () => {
-    // Redirecionar para a rota de logout
     navigate('/logout');
   };
 
@@ -101,6 +100,7 @@ const Dashboard: React.FC = () => {
               <th style={styles.th}>Título</th>
               <th style={styles.th}>Descrição</th>
               <th style={styles.th}>Tipo</th>
+              <th style={styles.th}>Endereço</th>
               <th style={styles.th}>Status</th>
               <th style={styles.th}>Ações</th>
             </tr>
@@ -112,6 +112,7 @@ const Dashboard: React.FC = () => {
                 <td style={styles.td}>{report.title}</td>
                 <td style={styles.td}>{report.description}</td>
                 <td style={styles.td}>{report.type?.name || 'Tipo desconhecido'}</td>
+                <td style={styles.td}>{report.location}</td>
                 <td style={styles.td}>
                   {editingReportId === report.id ? (
                     <select 
@@ -152,6 +153,7 @@ const Dashboard: React.FC = () => {
               <th style={styles.th}>Título</th>
               <th style={styles.th}>Descrição</th>
               <th style={styles.th}>Tipo</th>
+              <th style={styles.th}>Endereço</th>
               <th style={styles.th}>Status</th>
               <th style={styles.th}>Ações</th>
             </tr>
@@ -163,6 +165,7 @@ const Dashboard: React.FC = () => {
                 <td style={styles.td}>{report.title}</td>
                 <td style={styles.td}>{report.description}</td>
                 <td style={styles.td}>{report.type?.name || 'Tipo desconhecido'}</td>
+                <td style={styles.td}>{report.location}</td>
                 <td style={styles.td}>
                   {editingReportId === report.id ? (
                     <select 
@@ -204,7 +207,6 @@ const Dashboard: React.FC = () => {
 };
 
 const styles: { [key: string]: React.CSSProperties } = {
-  // Seu CSS permanece o mesmo
   dashboardContainer: {
     fontFamily: 'Arial, sans-serif',
   },
